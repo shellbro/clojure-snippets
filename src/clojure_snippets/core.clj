@@ -48,7 +48,7 @@
   ([x precision decimal-sep thousands-sep]
    (format
     (str "%." precision \f)
-    (bigdec x)))) ; locale is read from a host for now
+    (bigdec x)))) ; for now, locale is read from a host
 
 
                                         ; booleans
