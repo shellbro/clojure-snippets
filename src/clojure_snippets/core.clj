@@ -46,13 +46,10 @@
 
 
 (defn num->str
-  ([x] (num->str x 2 \, \space))
-  ([x precision] (num->str x precision \, \space))
-  ([x precision decimal-sep] (num->str x precision decimal-sep \space))
-  ([x precision decimal-sep thousands-sep]
-   (format
-    (str "%." precision \f)
-    (bigdec x)))) ; for now, locale is read from a host
+  ([x] (num->str x 2))
+  ([x precision] (format
+                  (str "%." precision \f) ; use host locale (decimal-sep, thousands-sep)
+                  (bigdec x))))
 
 
                                         ; booleans
