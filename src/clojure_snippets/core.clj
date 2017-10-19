@@ -9,6 +9,11 @@
                                         ; numbers
 
 
+(class 1)
+(class 1N)
+(class 1M)
+
+
 (clojure.math.numeric-tower/round (/ 3 2))
 
 
