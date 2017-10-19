@@ -2,16 +2,17 @@
   (:gen-class))
 
 
+(require 'clojure.math.numeric-tower)
 (require 'clojure.string)
 
 
                                         ; numbers
 
 
-(defn round [n] (Math/round n)) ; won't work for Clojure numeric types
+(clojure.math.numeric-tower/round (/ 3 2))
 
 
-(defn abs [n] (max n (- n))) ; (abs Long/MIN_VALUE) -> exception
+(clojure.math.numeric-tower/abs Long/MIN_VALUE)
 
 
                                         ; strings
@@ -36,13 +37,13 @@
 
 
 (defn num->str
-  ([n] (num->str n 2 \, \space))
-  ([n precision] (num->str n precision \, \space))
-  ([n precision decimal-sep] (num->str n precision decimal-sep \space))
-  ([n precision decimal-sep thousands-sep]
+  ([x] (num->str x 2 \, \space))
+  ([x precision] (num->str x precision \, \space))
+  ([x precision decimal-sep] (num->str x precision decimal-sep \space))
+  ([x precision decimal-sep thousands-sep]
    (format
     (str "%." precision \f)
-    (bigdec n)))) ; locale is read from a host for now
+    (bigdec x)))) ; locale is read from a host for now
 
 
                                         ; booleans
