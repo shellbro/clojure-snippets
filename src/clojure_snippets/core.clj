@@ -14,6 +14,10 @@
 (class 1M)
 
 
+(bigint 1)
+(bigdecimal 1)
+
+
 (clojure.math.numeric-tower/round (/ 3 2))
 
 
