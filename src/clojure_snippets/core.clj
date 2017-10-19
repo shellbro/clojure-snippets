@@ -7,16 +7,24 @@
 
                                         ; numbers
 
-(defn abs [n] (max n (- n)))
+
+(defn round [n] (Math/round n)) ; won't work for Clojure numeric types
+
+
+(defn abs [n] (max n (- n))) ; (abs Long/MIN_VALUE) -> exception
 
 
                                         ; strings
 
+
 (bigdec "12.34") ; parse String (or anything) into Number (BigDecimal)
+
 
 (str 12.34M) ; cast anything to String
 
+
 (str 1 "foo" \a) ; append/prepend to a String
+
 
 (defn str->num
   ([s] (str->num s \, \space))
@@ -25,6 +33,7 @@
    (bigdec
     (clojure.string/replace
      (clojure.string/replace s decimal-sep \.) (str thousands-sep) ""))))
+
 
 (defn num->str
   ([n] (num->str n 2 \, \space))
@@ -37,6 +46,7 @@
 
 
                                         ; booleans
+
 
 (boolean "12.34") ; see truthiness of a value
 (boolean nil)
