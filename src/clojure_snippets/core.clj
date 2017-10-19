@@ -10,6 +10,10 @@
                                         ; append/prepend to a String
 (str 1 "foo" \a)
 
+                                        ; abs
+(defn abs [n] (max n (- n)))
+
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
