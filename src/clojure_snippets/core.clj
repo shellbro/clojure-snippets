@@ -15,7 +15,7 @@
 
 
 (bigint 1)
-(bigdecimal 1)
+(bigdec 1)
 
 
 (clojure.math.numeric-tower/round (/ 3 2))
@@ -59,8 +59,15 @@
 (boolean nil)
 (boolean false)
 
-  
+
                                         ; dates
+
+
+                                        ; files
+
+
+(defn lines [f]
+  (clojure.string/split-lines (slurp f)))
 
 
 (defn -main
