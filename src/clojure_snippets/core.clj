@@ -1,10 +1,8 @@
 (ns clojure-snippets.core
+  (:require
+   [clojure.math.numeric-tower]
+   [clojure.string])
   (:gen-class))
-
-
-(require 'clojure.math.numeric-tower)
-(require 'clojure.string)
-
 
                                         ; numbers
 
