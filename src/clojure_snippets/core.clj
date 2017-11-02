@@ -48,7 +48,7 @@
 (defn num->str
   ([x] (num->str x 2))
   ([x precision] (format
-                  (str "%." precision \f) ; use host locale (decimal-sep, thousands-sep)
+                  (str "%." precision \f) ; use host locale: decimal-sep, thousands-sep...
                   (bigdec x))))
 
 
