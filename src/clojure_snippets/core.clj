@@ -8,12 +8,16 @@
 
 
 (class 1)
+
+
 (class 1N)
-(class 1M)
-
-
 (bigint 1)
+(integer? 1N)
+
+
+(class 1M)
 (bigdec 1)
+(decimal? 1M)
 
 
 (clojure.math.numeric-tower/round (/ 3 2))
