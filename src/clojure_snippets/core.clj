@@ -20,6 +20,13 @@
 (decimal? 1M)
 
 
+(defn round2
+  "Round a double to the given precision (number of fractional digits)"
+  [d precision]
+  (let [factor (Math/pow 10 precision)]
+    (/ (Math/round (* d factor)) factor)))
+
+
 (clojure.math.numeric-tower/round (/ 3 2))
 
 
