@@ -72,11 +72,15 @@
                                         ; dates
 
 
-                                        ; files
+                                        ; io
 
 
 (defn lines [f]
   (clojure.string/split-lines (slurp f)))
+
+
+(binding [*out* *err*]
+  (println "This text will be printed to STDERR"))
 
 
 (defn -main
