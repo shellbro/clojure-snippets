@@ -27,13 +27,15 @@
 
                                         ; numbers - doubles and exact numbers (ratios, decimals)
                                         ; WARNING: 1/3 can't be expressed exactly
-                                        ; in a base 2 (double) or even in a base 10 (decimal)
+                                        ; in a base 2 (double) or in a base 10 (decimal)
+                                        ; but decimal throws an exception
 
 
 (rationalize 0.3) ; 3/10
 (class (rationalize 0.3)) ; clojure.lang.Ratio
 (ratio? (/ 1 3)) ; true
-(class (+ (/ 3 2) 0.1)) ; java.lang.Double
+(class (+ (/ 1 3) 0.1)) ; java.lang.Double
+(class (+ (/ 1 3) 0.1M)) ; Non-terminating decimal expansion; no exact representable decimal result.
 (class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
 
 
@@ -54,16 +56,33 @@
 (class (/ 1M 3M)) ; ; Non-terminating decimal expansion; no exact representable decimal result.
 
 
-(class (clojure.math.numeric-tower/floor 1.5)) ; java.lang.Double
-(class (clojure.math.numeric-tower/floor 1.5M)) ; clojure.lang.BigInt
-(class (clojure.math.numeric-tower/ceil 1.5)) ; java.lang.Double
-(class (clojure.math.numeric-tower/ceil 1.5)) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/floor 1)) ; java.lang.Long
+(class (clojure.math.numeric-tower/floor 1N)) ; java.lang.BigInt
+(class (clojure.math.numeric-tower/floor (/ 1 3))) ; java.lang.BigInt
+(class (clojure.math.numeric-tower/floor 0.1)) ; java.lang.Double
+(class (clojure.math.numeric-tower/floor 0.1M)) ; clojure.lang.BigInt
+
+
+(class (clojure.math.numeric-tower/ceil 1)) ; java.lang.Long
+(class (clojure.math.numeric-tower/ceil 1N)) ; java.lang.BigInt
+(class (clojure.math.numeric-tower/ceil (/ 1 3))) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/ceil 0.1)) ; java.lang.Double
+(class (clojure.math.numeric-tower/ceil 0.1M)) ; clojure.lang.BigInt
+
+
+(class (clojure.math.numeric-tower/round 1)) ; java.lang.Long
+(class (clojure.math.numeric-tower/round 1N)) ; java.lang.BigInt
+(class (clojure.math.numeric-tower/round (/ 1 3))) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/round 0.1)) ; java.lang.Long
+(class (clojure.math.numeric-tower/round 0.1M)) ; clojure.lang.BigInt
 
 
 (class (clojure.math.numeric-tower/abs 1)) ; java.lang.Long
 (class (clojure.math.numeric-tower/abs Long/MIN_VALUE)) ; clojure.lang.BigInt
-(class (clojure.math.numeric-tower/round 1.5)) ; java.lang.Long
-(class (clojure.math.numeric-tower/round 1.5M)) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/abs 1N)) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/abs (/ 1 3))) ; clojure.lang.Ratio
+(class (clojure.math.numeric-tower/abs 0.1)) ; java.lang.Double
+(class (clojure.math.numeric-tower/abs 0.1M)) ; java.math.BigDecimal
 
 
 (defn round2
