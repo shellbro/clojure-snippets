@@ -53,7 +53,8 @@
 (class (* 0.1M 0.1M)) ; java.math.BigDecimal
 (class (/ 0.1M 0.1)) ; java.lang.Double
 (class (/ 0.1M 0.1M)) ; java.math.BigDecimal
-(class (/ 1M 3M)) ; ; Non-terminating decimal expansion; no exact representable decimal result.
+(class (/ 1M 3M)) ; Non-terminating decimal expansion; no exact representable decimal result.
+(with-precision 2 (/ 1M 3M)) ; 0.33M
 
 
 (class (clojure.math.numeric-tower/floor 1)) ; java.lang.Long
