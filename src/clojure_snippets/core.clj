@@ -34,6 +34,7 @@
 (class (/ 1 3)) ; clojure.lang.Ratio
 (class (/ 1N 3)) ; clojure.lang.Ratio
 (rationalize 0.3) ; 3/10
+(rationalize 0.3M) ; 3/10
 (class (rationalize 0.3)) ; clojure.lang.Ratio
 (ratio? (/ 1 3)) ; true
 (ratio? (/ 1 1)) ; false
@@ -41,6 +42,10 @@
 (class (+ (/ 1 3) 0.1)) ; java.lang.Double
 (class (+ (/ 1 3) 0.1M)) ; Non-terminating decimal expansion; no exact representable decimal result.
 (class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
+
+
+(+ 0.1 0.2) ; 0.30000000000000004
+(format "%.2f" 0.005) ; "0.01"
 
 
 (class 0.1) ; java.lang.Double
