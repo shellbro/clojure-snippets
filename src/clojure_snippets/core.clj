@@ -31,9 +31,13 @@
                                         ; but decimal throws an exception
 
 
+(class (/ 1 3)) ; clojure.lang.Ratio
+(class (/ 1N 3)) ; clojure.lang.Ratio
 (rationalize 0.3) ; 3/10
 (class (rationalize 0.3)) ; clojure.lang.Ratio
 (ratio? (/ 1 3)) ; true
+(ratio? (/ 1 1)) ; false
+(= (/ 3 2) 1.5M) ; false
 (class (+ (/ 1 3) 0.1)) ; java.lang.Double
 (class (+ (/ 1 3) 0.1M)) ; Non-terminating decimal expansion; no exact representable decimal result.
 (class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
@@ -87,10 +91,11 @@
 
 
 (defn round2
-  "Round a double to the given precision (number of fractional digits)"
+  "Round to the given precision (number of fractional digits)"
   [d precision]
-  (let [factor (Math/pow 10 precision)]
-    (/ (Math/round (* d factor)) factor)))
+  (let [factor (clojure.math.numeric-tower/expt 10 precision)]
+    (bigdec (/ (clojure.math.numeric-tower/round (* d factor))
+               factor))))
 
 
                                         ; strings
