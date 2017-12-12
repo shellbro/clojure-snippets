@@ -26,23 +26,32 @@
 
 
                                         ; numbers - doubles and exact numbers (ratios, decimals)
+                                        ; WARNING: 1/3 can't be expressed exactly
+                                        ; in a base 2 (double) or even in a base 10 (decimal)
+
+
+(rationalize 0.3) ; 3/10
+(class (rationalize 0.3)) ; clojure.lang.Ratio
+(ratio? (/ 1 3)) ; true
+(class (+ (/ 3 2) 0.1)) ; java.lang.Double
+(class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
 
 
 (class 0.1) ; java.lang.Double
 (class 0.1M) ; java.math.BigDecimal
 (bigdec 0.1) ; 0.1M
 (bigdec "0.1") ; 0.1M
+(bigdec (/ 1 3)) ; Non-terminating decimal expansion; no exact representable decimal result.
 (decimal? 0.1) ; false
 (decimal? 0.1M) ; true
 (= 0.1 0.1M) ; false
 (class (+ 0.1M 0.1)) ; java.lang.Double
-
-
-(ratio? 1.5M) ; false
-(ratio? (/ 3 2)) ; true
-(class (+ (/ 3 2) 0.1)) ; java.lang.Double
-(class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
-(class (+ 0.1M (/ 3 2))) ; java.math.BigDecimal
+(class (+ 0.1M 0.1M)) ; java.math.BigDecimal
+(class (* 0.1M 0.1)) ; java.lang.Double
+(class (* 0.1M 0.1M)) ; java.math.BigDecimal
+(class (/ 0.1M 0.1)) ; java.lang.Double
+(class (/ 0.1M 0.1M)) ; java.math.BigDecimal
+(class (/ 1M 3M)) ; ; Non-terminating decimal expansion; no exact representable decimal result.
 
 
 (class (clojure.math.numeric-tower/floor 1.5)) ; java.lang.Double
