@@ -25,7 +25,7 @@
 (class (biginteger "1")) ; java.math.BigInteger
 
 
-                                        ; numbers - exact numbers (ratios, decimals) and decimals
+                                        ; numbers - exact numbers (ratios, decimals) and doubles
                                         ; WARNING: 1/3 can't be expressed exactly
                                         ; in a base 2 (double) or in a base 10 (decimal)
                                         ; but decimal throws an exception
