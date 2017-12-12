@@ -39,9 +39,9 @@
 (ratio? (/ 1 3)) ; true
 (ratio? (/ 1 1)) ; false
 (= (/ 3 2) 1.5M) ; false
-(class (+ (/ 1 3) 0.1)) ; java.lang.Double
 (class (+ (/ 1 3) 0.1M)) ; Non-terminating decimal expansion; no exact representable decimal result.
 (class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
+(class (+ (/ 1 3) 0.1)) ; java.lang.Double
 
 
 (class 0.1) ; java.lang.Double
@@ -63,8 +63,6 @@
 
 
 (+ 0.1 0.2) ; 0.30000000000000004
-(format "%.2f" 0.005) ; "0.01"
-(format "%.2f" 0.005M) ; "0.01"
 
 
 (class (clojure.math.numeric-tower/floor 1)) ; java.lang.Long
@@ -109,6 +107,11 @@
 
 (str 12.34M) ; cast anything to String
 (str 1 "foo" \a) ; append/prepend to a String
+
+
+(format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
+(format "%.2f" 0.005M) ; "0.01"
+(format "%.2f" 0.005) ; "0.01"
 
 
 (defn str->num
