@@ -4,20 +4,48 @@
    [clojure.string])
   (:gen-class))
 
-                                        ; numbers
+
+                                        ; numbers - integers
 
 
-(class 1)
+(class 1) ; java.lang.Long
+(class 1N) ; clojure.lang.BigInt
+(bigint 1) ; 1N
+(bigint "1") ; 1N
+(integer? 1) ; true
+(integer? 1N) ; true
+(= 1 1N) ; true
+(class (+ 1 1N)) ; clojure.lang.BigInt
 
 
-(class 1N)
-(bigint 1)
-(integer? 1N)
+(biginteger 1) ; 1
+(biginteger "1") ; 1
+(class (biginteger "1")) ; java.math.BigInteger
 
 
-(class 1M)
-(bigdec 1)
-(decimal? 1M)
+                                        ; numbers - doubles and exact numbers (ratios, decimals)
+
+
+(class 0.1) ; java.lang.Double
+(class 0.1M) ; java.math.BigDecimal
+(bigdec 0.1) ; 0.1M
+(bigdec "0.1") ; 0.1M
+(decimal? 0.1) ; false
+(decimal? 0.1M) ; true
+(= 0.1 0.1M) ; false
+(class (+ 0.1M 0.1)) ; java.lang.Double
+
+
+(class (clojure.math.numeric-tower/floor 1.5)) ; java.lang.Double
+(class (clojure.math.numeric-tower/floor 1.5M)) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/ceil 1.5)) ; java.lang.Double
+(class (clojure.math.numeric-tower/ceil 1.5)) ; clojure.lang.BigInt
+
+
+(class (clojure.math.numeric-tower/abs 1)) ; java.lang.Long
+(class (clojure.math.numeric-tower/abs Long/MIN_VALUE)) ; clojure.lang.BigInt
+(class (clojure.math.numeric-tower/round 1.5)) ; java.lang.Long
+(class (clojure.math.numeric-tower/round 1.5M)) ; clojure.lang.BigInt
 
 
 (defn round2
@@ -27,21 +55,10 @@
     (/ (Math/round (* d factor)) factor)))
 
 
-(clojure.math.numeric-tower/round (/ 3 2))
-
-
-(clojure.math.numeric-tower/abs Long/MIN_VALUE)
-
-
                                         ; strings
 
 
-(bigdec "12.34") ; parse String (or anything) into Number (BigDecimal)
-
-
 (str 12.34M) ; cast anything to String
-
-
 (str 1 "foo" \a) ; append/prepend to a String
 
 
