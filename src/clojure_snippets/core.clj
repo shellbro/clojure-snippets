@@ -133,9 +133,12 @@
                                         ; booleans
 
 
-(boolean "12.34") ; see truthiness of a value
-(boolean nil)
-(boolean false)
+                                        ; see truthiness of a value
+(boolean "foo") ; true
+(boolean 0) ; true
+(boolean '()) ; true
+(boolean nil) ; false
+(boolean false) ; false
 
 
                                         ; dates
