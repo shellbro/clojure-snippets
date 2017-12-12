@@ -37,6 +37,7 @@
 (= 0.1 0.1M) ; false
 (class (+ 0.1M 0.1)) ; java.lang.Double
 
+
 (ratio? 1.5M) ; false
 (ratio? (/ 3 2)) ; true
 (class (+ (/ 3 2) 0.1)) ; java.lang.Double
