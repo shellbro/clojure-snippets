@@ -25,7 +25,7 @@
 (class (biginteger "1")) ; java.math.BigInteger
 
 
-                                        ; numbers - doubles and exact numbers (ratios, decimals)
+                                        ; numbers - exact numbers (ratios, decimals) and decimals
                                         ; WARNING: 1/3 can't be expressed exactly
                                         ; in a base 2 (double) or in a base 10 (decimal)
                                         ; but decimal throws an exception
@@ -46,6 +46,7 @@
 
 (+ 0.1 0.2) ; 0.30000000000000004
 (format "%.2f" 0.005) ; "0.01"
+(format "%.2f" 0.005M) ; "0.01"
 
 
 (class 0.1) ; java.lang.Double
