@@ -16,6 +16,8 @@
 (integer? 1N) ; true
 (= 1 1N) ; true
 (class (+ 1 1N)) ; clojure.lang.BigInt
+(+ Long/MAX_VALUE 1) ; integer overflow
+(+' Long/MAX_VALUE 1) ; 9223372036854775808N
 
 
 (biginteger 1) ; 1
@@ -34,6 +36,12 @@
 (decimal? 0.1M) ; true
 (= 0.1 0.1M) ; false
 (class (+ 0.1M 0.1)) ; java.lang.Double
+
+(ratio? 1.5M) ; false
+(ratio? (/ 3 2)) ; true
+(class (+ (/ 3 2) 0.1)) ; java.lang.Double
+(class (+ (/ 3 2) 0.1M)) ; java.math.BigDecimal
+(class (+ 0.1M (/ 3 2))) ; java.math.BigDecimal
 
 
 (class (clojure.math.numeric-tower/floor 1.5)) ; java.lang.Double
