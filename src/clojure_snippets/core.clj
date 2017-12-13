@@ -49,6 +49,7 @@
 (bigdec 0.1) ; 0.1M
 (bigdec "0.1") ; 0.1M
 (bigdec (/ 1 3)) ; Non-terminating decimal expansion; no exact representable decimal result.
+(with-precision 2 (bigdec (/ 1 3))) ; 0.33M
 (decimal? 0.1) ; false
 (decimal? 0.1M) ; true
 (= 0.1 0.1M) ; false
