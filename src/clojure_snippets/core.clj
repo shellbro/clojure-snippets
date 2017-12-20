@@ -1,5 +1,6 @@
 (ns clojure-snippets.core
   (:require
+   [clj-time.format]
    [clojure.math.numeric-tower]
    [clojure.string])
   (:gen-class))
@@ -146,11 +147,11 @@
 
 
 (defn str->date [s]
-  (tf/parse (tf/formatter "dd.MM.YYYY") s))
+  (clj-time.format/parse (clj-time.format/formatter "dd.MM.YYYY") s))
 
 
 (defn date->str [d]
-  (tf/unparse (tf/formatters :year-month-day) d))
+  (clj-time.format/unparse (clj-time.format/formatters :year-month-day) d))
 
 
                                         ; io
