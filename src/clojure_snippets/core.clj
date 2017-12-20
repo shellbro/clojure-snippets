@@ -103,18 +103,6 @@
                factor))))
 
 
-                                        ; strings
-
-
-(str 12.34M) ; cast anything to String
-(str 1 "foo" \a) ; append/prepend to a String
-
-
-(format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
-(format "%.2f" 0.005M) ; "0.01"
-(format "%.2f" 0.005) ; "0.01"
-
-
 (defn str->num
   ([s] (str->num s \, \space))
   ([s decimal-sep] (str->num s decimal-sep \space))
@@ -129,6 +117,18 @@
   ([n precision] (format
                   (str "%." precision \f) ; use host locale: decimal-sep, thousands-sep
                   (bigdec n))))
+
+
+                                        ; strings
+
+
+(str 12.34M) ; cast anything to String
+(str 1 "foo" \a) ; append/prepend to a String
+
+
+(format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
+(format "%.2f" 0.005M) ; "0.01"
+(format "%.2f" 0.005) ; "0.01"
 
 
                                         ; booleans
