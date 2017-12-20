@@ -100,8 +100,8 @@
   "Round to the given precision (number of fractional digits)"
   [d precision]
   (let [factor (clojure.math.numeric-tower/expt 10 precision)]
-    (bigdec (/ (clojure.math.numeric-tower/round (* d factor))
-               factor))))
+    (bigdec
+     (/ (clojure.math.numeric-tower/round (* d factor)) factor))))
 
 
                                         ; use root locale by default (same as bigdec)
