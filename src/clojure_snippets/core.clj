@@ -115,9 +115,14 @@
 
 (defn num->str
   ([n] (num->str n 2))
-  ([n precision] (format
-                  (str "%." precision \f) ; use host locale: decimal-sep, thousands-sep
-                  (bigdec n))))
+  ([n precision] (format (str "%." precision \f) ; use host locale: decimal-sep, thousands-sep
+                         (bigdec n))))
+
+
+(defn d->str [d precision]
+  (java.lang.String/format java.util.Locale/ROOT
+                           (str "%." precision "f")
+                           (to-array [d])))
 
 
                                         ; strings
