@@ -130,8 +130,8 @@
                                         ; use host locale by default
 (defn num->str
   ([n] (num->str n 2))
-  ([n precision] (format (str "%." precision \f)
-                         (bigdec n))))
+  ([n precision]
+   (format (str "%." precision \f) (bigdec n))))
 
 
 (format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
