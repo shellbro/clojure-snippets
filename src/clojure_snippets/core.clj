@@ -125,10 +125,10 @@
 
 
 (defn num->str
-  ([x] (num->str x 2))
-  ([x precision] (format
+  ([n] (num->str n 2))
+  ([n precision] (format
                   (str "%." precision \f) ; use host locale: decimal-sep, thousands-sep
-                  (bigdec x))))
+                  (bigdec n))))
 
 
                                         ; booleans
@@ -143,6 +143,12 @@
 
 
                                         ; dates
+(defn str->date [s]
+  (tf/parse (tf/formatter "dd.MM.YYYY") s))
+
+
+(defn date->str [d]
+  (tf/unparse (tf/formatters :year-month-day) d))
 
 
                                         ; io
