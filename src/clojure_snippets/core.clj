@@ -134,16 +134,16 @@
                          (bigdec n))))
 
 
+(format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
+(format "%.2f" 0.005M) ; "0.01"
+(format "%.2f" 0.005) ; "0.01"
+
+
                                         ; strings
 
 
 (str 12.34M) ; cast anything to String
 (str 1 "foo" \a) ; append/prepend to a String
-
-
-(format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
-(format "%.2f" 0.005M) ; "0.01"
-(format "%.2f" 0.005) ; "0.01"
 
 
                                         ; booleans
