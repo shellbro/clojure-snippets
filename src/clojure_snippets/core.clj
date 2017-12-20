@@ -104,7 +104,7 @@
                factor))))
 
 
-                                        ; use root locale by default
+                                        ; use root locale by default (same as bigdec)
 (defn str->dec
   ([s] (str->num s \. ""))
   ([s decimal-sep thousands-sep]
