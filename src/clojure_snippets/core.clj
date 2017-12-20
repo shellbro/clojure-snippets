@@ -104,25 +104,34 @@
                factor))))
 
 
-(defn str->num
-  ([s] (str->num s \, \space))
-  ([s decimal-sep] (str->num s decimal-sep \space))
+                                        ; use root locale by default
+(defn str->dec
+  ([s] (str->num s \. ""))
   ([s decimal-sep thousands-sep]
-   (bigdec
-    (clojure.string/replace
-     (clojure.string/replace s decimal-sep \.) (str thousands-sep) ""))))
+   (bigdec (clojure.string/replace
+            (clojure.string/replace s (str decimal-sep) ".") (str thousands-sep) ""))))
 
 
+(defn pl-pl-str->dec [s] (str->dec s \, \space))
+
+
+(defn en-us-str->dec [s] (str->dec s \. \,))
+
+
+                                        ; use root locale by default
+(defn d->str
+  ([d] (d->str d 2))
+  ([d precision]
+   (java.lang.String/format java.util.Locale/ROOT
+                            (str "%." precision "f")
+                            (to-array [d]))))
+
+
+                                        ; use host locale by default
 (defn num->str
   ([n] (num->str n 2))
-  ([n precision] (format (str "%." precision \f) ; use host locale: decimal-sep, thousands-sep
+  ([n precision] (format (str "%." precision \f)
                          (bigdec n))))
-
-
-(defn d->str [d precision]
-  (java.lang.String/format java.util.Locale/ROOT
-                           (str "%." precision "f")
-                           (to-array [d])))
 
 
                                         ; strings
@@ -151,12 +160,20 @@
                                         ; dates
 
 
-(defn str->date [s]
+(defn iso-str->date [s]
+  (clj-time.format/parse (clj-time.format/formatters :year-month-day) s))
+
+
+(defn pl-pl-str->date [s]
   (clj-time.format/parse (clj-time.format/formatter "dd.MM.YYYY") s))
 
 
-(defn date->str [d]
+(defn date->iso-str [d]
   (clj-time.format/unparse (clj-time.format/formatters :year-month-day) d))
+
+
+(defn date->pl-pl-str [d]
+  (clj-time.format/unparse (clj-time.format/formatter "dd.MM.YYYY") d))
 
 
                                         ; io
