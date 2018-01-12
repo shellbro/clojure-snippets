@@ -98,10 +98,10 @@
 
 (defn round2
   "Round to the given precision (number of fractional digits)"
-  [d precision]
+  [x precision]
   (let [factor (clojure.math.numeric-tower/expt 10 precision)]
     (bigdec
-     (/ (clojure.math.numeric-tower/round (* d factor)) factor))))
+     (/ (clojure.math.numeric-tower/round (* x factor)) factor))))
 
 
                                         ; use root locale by default (same as bigdec)
@@ -129,9 +129,9 @@
 
                                         ; use host locale by default
 (defn num->str
-  ([n] (num->str n 2))
-  ([n precision]
-   (format (str "%." precision \f) (bigdec n))))
+  ([x] (num->str x 2))
+  ([x precision]
+   (format (str "%." precision \f) (bigdec x))))
 
 
 (format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
