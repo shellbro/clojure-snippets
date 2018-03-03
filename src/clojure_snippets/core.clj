@@ -6,7 +6,7 @@
   (:gen-class))
 
 
-                                        ; integers
+                                        ; numbers - integers
 
 
 (class 1) ; java.lang.Long
@@ -26,7 +26,7 @@
 (class (biginteger "1")) ; java.math.BigInteger
 
 
-                                        ; real numbers: exact numbers (ratios, decimals) and doubles
+                                        ; numbers - real numbers: exact numbers (ratios, decimals) and doubles
                                         ; warning: 1/3 can't be expressed exactly in base 10 (decimal)
                                         ; or in base 2 (double) but decimal throws an exception
 
@@ -136,6 +136,9 @@
 (format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
 (format "%.2f" 0.005M) ; "0.01"
 (format "%.2f" 0.005) ; "0.01"
+
+
+                                        ; bytes
 
 
                                         ; strings
