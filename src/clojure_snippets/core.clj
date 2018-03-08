@@ -7,30 +7,32 @@
 
 
                                         ; numbers - integers
-
-
 (class 1) ; java.lang.Long
 (class 1N) ; clojure.lang.BigInt
+(class (biginteger "1")) ; java.math.BigInteger
 (bigint 1) ; 1N
 (bigint "1") ; 1N
-(integer? 1) ; true
-(integer? 1N) ; true
-(= 1 1N) ; true
-(class (+ 1 1N)) ; clojure.lang.BigInt
-(+ Long/MAX_VALUE 1) ; integer overflow
-(+' Long/MAX_VALUE 1) ; 9223372036854775808N
-
-
 (biginteger 1) ; 1
 (biginteger "1") ; 1
-(class (biginteger "1")) ; java.math.BigInteger
+(integer? 1) ; true
+(integer? 1N) ; true
+(integer? (biginteger 1)) ; true
+(= 1 1N) ; true
+(= 1 (biginteger 1)) ; true
+(= 1N (biginteger 1)) ; true
+                                        ; clojure.lang.BigInt is contagious
+(class (+ 1 1N)) ; clojure.lang.BigInt
+(class (+ 1 (biginteger 1))) ; clojure.lang.BigInt
+(class (+ 1N (biginteger 1))) ; clojure.lang.BigInt
+(+ Long/MAX_VALUE 1) ; integer overflow
+(+' Long/MAX_VALUE 1) ; 9223372036854775808N
+(quot 22 7) ; 3
+(rem 22 7) ; 1
 
 
                                         ; numbers - real numbers: exact numbers (ratios, decimals) and doubles
                                         ; warning: 1/3 can't be expressed exactly in base 10 (decimal)
                                         ; or in base 2 (double) but decimal throws an exception
-
-
 (class (/ 1 3)) ; clojure.lang.Ratio
 (class (/ 1N 3)) ; clojure.lang.Ratio
 (rationalize 0.3) ; 3/10
@@ -141,27 +143,21 @@
                                         ; bytes
 
 
-                                        ; strings
-
-
+                                        ; strings and characters
 (str 12.34M) ; cast anything to String
 (str 1 "foo" \a) ; append/prepend to a String
 
 
-                                        ; booleans
-
-
+                                        ; booleans and nil
                                         ; see truthiness of a value
-(boolean "foo") ; true
+(boolean false) ; false
+(boolean nil) ; false
 (boolean 0) ; true
 (boolean '()) ; true
-(boolean nil) ; false
-(boolean false) ; false
+(boolean "foo") ; true
 
 
                                         ; dates
-
-
 (defn iso-str->date [s]
   (clj-time.format/parse (clj-time.format/formatters :year-month-day) s))
 
@@ -179,8 +175,6 @@
 
 
                                         ; io
-
-
 (defn lines [f]
   (clojure.string/split-lines (slurp f)))
 
