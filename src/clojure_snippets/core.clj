@@ -1,8 +1,7 @@
 (ns clojure-snippets.core
-  (:require
-   [clj-time.format]
-   [clojure.math.numeric-tower]
-   [clojure.string])
+  (:require [clj-time.format]
+            [clojure.math.numeric-tower]
+            [clojure.string])
   (:gen-class))
 
 
