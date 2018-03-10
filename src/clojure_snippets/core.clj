@@ -33,6 +33,7 @@
                                         ;;;; numbers - real numbers: exact numbers (ratios, decimals) and doubles
                                         ;;; warning: 1/3 can't be expressed exactly in base 10 (decimal)
                                         ;;; or in base 2 (double) but decimal throws an exception
+(class 1/3) ; clojure.lang.Ratio
 (class (/ 1 3)) ; clojure.lang.Ratio
 (class (/ 1N 3)) ; clojure.lang.Ratio
 (rationalize 0.3) ; 3/10
