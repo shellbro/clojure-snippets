@@ -6,7 +6,7 @@
   (:gen-class))
 
 
-                                        ; numbers - integers
+                                        ;;;; numbers - integers
 (class 1) ; java.lang.Long
 (class 1N) ; clojure.lang.BigInt
 (class (biginteger "1")) ; java.math.BigInteger
@@ -20,7 +20,7 @@
 (= 1 1N) ; true
 (= 1 (biginteger 1)) ; true
 (= 1N (biginteger 1)) ; true
-                                        ; clojure.lang.BigInt is contagious
+;; clojure.lang.BigInt is contagious
 (class (+ 1 1N)) ; clojure.lang.BigInt
 (class (+ 1 (biginteger 1))) ; clojure.lang.BigInt
 (class (+ 1N (biginteger 1))) ; clojure.lang.BigInt
@@ -30,9 +30,9 @@
 (rem 22 7) ; 1
 
 
-                                        ; numbers - real numbers: exact numbers (ratios, decimals) and doubles
-                                        ; warning: 1/3 can't be expressed exactly in base 10 (decimal)
-                                        ; or in base 2 (double) but decimal throws an exception
+                                        ;;;; numbers - real numbers: exact numbers (ratios, decimals) and doubles
+                                        ;;; warning: 1/3 can't be expressed exactly in base 10 (decimal)
+                                        ;;; or in base 2 (double) but decimal throws an exception
 (class (/ 1 3)) ; clojure.lang.Ratio
 (class (/ 1N 3)) ; clojure.lang.Ratio
 (rationalize 0.3) ; 3/10
@@ -105,7 +105,7 @@
      (/ (clojure.math.numeric-tower/round (* x factor)) factor))))
 
 
-                                        ; use root locale by default (same as bigdec)
+;; use root locale by default (same as bigdec)
 (defn str->dec
   ([s] (str->num s \. ""))
   ([s decimal-sep thousands-sep]
@@ -119,7 +119,7 @@
 (defn en-us-str->dec [s] (str->dec s \. \,))
 
 
-                                        ; use root locale by default
+;; use root locale by default
 (defn d->str
   ([d] (d->str d 2))
   ([d precision]
@@ -128,7 +128,7 @@
                             (to-array [d]))))
 
 
-                                        ; use host locale by default
+;; use host locale by default
 (defn num->str
   ([x] (num->str x 2))
   ([x precision]
@@ -140,16 +140,16 @@
 (format "%.2f" 0.005) ; "0.01"
 
 
-                                        ; bytes
+                                        ;;;; bytes
 
 
-                                        ; strings and characters
+                                        ;;;; strings and characters
 (str 12.34M) ; cast anything to String
 (str 1 "foo" \a) ; append/prepend to a String
 
 
-                                        ; booleans and nil
-                                        ; see truthiness of a value
+                                        ;;;; booleans and nil
+;; see truthiness of a value
 (boolean false) ; false
 (boolean nil) ; false
 (boolean 0) ; true
@@ -157,7 +157,7 @@
 (boolean "foo") ; true
 
 
-                                        ; dates
+                                        ;;;; dates
 (defn iso-str->date [s]
   (clj-time.format/parse (clj-time.format/formatters :year-month-day) s))
 
@@ -174,7 +174,7 @@
   (clj-time.format/unparse (clj-time.format/formatter "dd.MM.YYYY") d))
 
 
-                                        ; io
+                                        ;;;; io
 (defn lines [f]
   (clojure.string/split-lines (slurp f)))
 
