@@ -26,7 +26,7 @@
   (round2 0.005M 2) ; 0.01M
   (round2 0.005 2)) ; 0.01M
 
-(class (+ 1 1N)) ; clojure.lang.BigInt - clojure.lang.BigInt is contagious
+(class (+ 1 1N)) ; clojure.lang.BigInt
 (class (+ 1N 1/3)) ; clojure.lang.Ratio
 (class (+ 1/3 0.1M)) ; Non-terminating decimal expansion; no exact ...
 (class (with-precision 2 (+ 1/3 0.1M))) ; java.math.BigDecimal
