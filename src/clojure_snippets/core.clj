@@ -84,6 +84,7 @@
 
 (comment
   (+ Long/MAX_VALUE 1)) ; Integer overflow
+(+ Long/MAX_VALUE 1N) ; 9223372036854775808N
 (+' Long/MAX_VALUE 1) ; 9223372036854775808N
 (quot 22 7) ; 3
 (rem 22 7) ; 1
@@ -114,8 +115,9 @@
   (/ 1M 3M)) ; Non-terminating decimal expansion; no exact ...
 (with-precision 2 (/ 1M 3M)) ; 0.33M
 
+;; Helper function wrapping bigdec (which uses ROOT locale)
 (defn str->dec
-  ([s] (str->dec s "." "")) ; Same as (bigdec s) - ROOT locale
+  ([s] (str->dec s "." ""))
   ([s decimal-sep thousands-sep]
    (let [ds (str decimal-sep) ts (str thousands-sep)]
      (-> s
