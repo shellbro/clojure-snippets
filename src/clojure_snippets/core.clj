@@ -1,5 +1,5 @@
 (ns clojure-snippets.core
-  (:require [clj-time.format]
+  (:require clj-time.format
             [clojure.math.numeric-tower :as nt]
             [clojure.string :as str])
   (:gen-class))
