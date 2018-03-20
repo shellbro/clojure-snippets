@@ -28,7 +28,8 @@
 
 (class (+ 1 1N)) ; clojure.lang.BigInt
 (class (+ 1N 1/3)) ; clojure.lang.Ratio
-(class (+ 1/3 0.1M)) ; Non-terminating decimal expansion; no exact ...
+(comment
+  (class (+ 1/3 0.1M))) ; Non-terminating decimal expansion; no exact ...
 (class (with-precision 2 (+ 1/3 0.1M))) ; java.math.BigDecimal
 (class (+ 0.1M 0.1)) ; java.lang.Double
 
@@ -81,7 +82,8 @@
 (class 1) ; java.lang.Long
 (class 1N) ; clojure.lang.BigInt
 
-(+ Long/MAX_VALUE 1) ; Integer overflow
+(comment
+  (+ Long/MAX_VALUE 1)) ; Integer overflow
 (+' Long/MAX_VALUE 1) ; 9223372036854775808N
 (quot 22 7) ; 3
 (rem 22 7) ; 1
@@ -101,13 +103,15 @@
 (decimal? 0.1) ; false
 
 (bigdec "0.1") ; 0.1M
-(bigdec 1/3) ; Non-terminating decimal expansion; no exact ...
+(comment
+  (bigdec 1/3)) ; Non-terminating decimal expansion; no exact ...
 (with-precision 2 (bigdec 1/3)) ; 0.33M
 
 (class 0.1M) ; java.math.BigDecimal
 (class 0.1) ; java.lang.Double
 
-(/ 1M 3M) ; Non-terminating decimal expansion; no exact ...
+(comment
+  (/ 1M 3M)) ; Non-terminating decimal expansion; no exact ...
 (with-precision 2 (/ 1M 3M)) ; 0.33M
 
 (defn str->dec
@@ -133,9 +137,12 @@
 (str 12.34M) ; Cast anything to string
 (str 1 "foo" \a) ; Append/prepend to a string
 
-(format "%.2f" 1) ; f != java.lang.Long
-(format "%.2f" 1N) ; f != clojure.lang.BigInt
-(format "%.2f" (/ 1 3)) ; f != clojure.lang.Ratio
+(comment
+  (format "%.2f" 1)) ; f != java.lang.Long
+(comment
+  (format "%.2f" 1N)) ; f != clojure.lang.BigInt
+(comment
+  (format "%.2f" (/ 1 3))) ; f != clojure.lang.Ratio
 (format "%.2f" 0.005M) ; "0.01"
 (format "%.2f" 0.005) ; "0.01"
 
