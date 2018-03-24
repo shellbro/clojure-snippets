@@ -201,13 +201,13 @@
 ;;;; Sequences and Collections
 [1 2 3] ; [1 2 3]
 (vec (range 1 4)) ; [1 2 3]
-(vector 1 2 3) ; 1 2 3
+(vector 1 2 3) ; [1 2 3]
 
 '(1 2 3) ; (1 2 3)
 
 #{5 1 3} ; #{1 3 5}
-(set [5 1 3]) #{1 3 5}
-(hash-set 5 1 3) #{1 3 5}
+(set [5 1 3]) ; #{1 3 5}
+(hash-set 5 1 3) ; #{1 3 5}
 (sorted-set) ; #{}
 (sorted-set 5 1 3) ; #{1 3 5}
 
@@ -258,7 +258,7 @@
 (conj {:a 5 :b 1 :c 3} {:d 10 :e 11} {:f 12}) ; {:a 5 :b 1 :c 3 :d 10 ... } ???
 
 (into nil [10 11 12]) ; (12 11 10)
-(into nil {:d 10 :e 11 :f 12}) ([:f 12] [:e 11] [:d 10])
+(into nil {:d 10 :e 11 :f 12}) ; ([:f 12] [:e 11] [:d 10])
 (into [] [10 11 12]) ; [10 11 12]
 (into [] {:d 10 :e 11 :f 12}) ; [[:d 10] [:e 11] [:f 12]]
 (into '(5 1 3) [10 11 12]) ; (12 11 10 5 1 3)
@@ -296,8 +296,10 @@
 ([nil false "c"] 0) ; nil
 ([nil false "c"] 1) ; false
 ([nil false "c"] 2) "c"
-([nil false "c"] 3) ; Unhandled java.lang.IndexOutOfBoundsException
-([nil false "c"] :foo) ; Key must be integer
+(comment
+  ([nil false "c"] 3)) ; Unhandled java.lang.IndexOutOfBoundsException
+(comment
+  ([nil false "c"] :foo)) ; Key must be integer
 
 (get [nil false "c"] 0) ; nil
 (get [nil false "c"] 1) ; false
@@ -339,7 +341,8 @@
 (:a nil) ; nil
 (:a {:a nil :b false "c" 1}) ; nil
 (:b {:a nil :b false "c" 1}) ; false
-("c" {:a nil :b false "c" 1}) ; "java.lang.String cannot be cast to ..."
+(comment
+  ("c" {:a nil :b false "c" 1})) ; "java.lang.String cannot be cast to ..."
 (:c {:a nil :b false "c" 1}) ; nil
 
 (get nil :a) ; nil
