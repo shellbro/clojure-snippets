@@ -198,6 +198,160 @@
 
 ;;;; Bytes
 
+;;;; Sequences and Collections
+[1 2 3] ; [1 2 3]
+(vec (range 1 4)) ; [1 2 3]
+(vector 1 2 3) ; 1 2 3
+
+'(1 2 3) ; (1 2 3)
+
+#{5 1 3} ; #{1 3 5}
+(set [5 1 3]) #{1 3 5}
+(hash-set 5 1 3) #{1 3 5}
+(sorted-set) ; #{}
+(sorted-set 5 1 3) ; #{1 3 5}
+
+{:c 3 :b 2 :a 1} ; {:c 3 :b 2 :a 1}
+(hash-map :c 3 :b 2 :a 1) ; {:c 3 :b 2 :a 1}
+(sorted-map) ; {}
+(sorted-map :c 3 :b 2 :a 1) ; {:a 1 :b 2 :c 3}
+
+(seq nil) ; nil
+(seq []) ; nil
+(seq "foo") ; (\f \o \o)
+(seq? "foo") ; false
+(seq? (seq "foo")) ; true
+
+;; car
+(first nil) ; nil
+(first []) ; nil
+(first '(5 1 3)) ; 5
+(first #{5 1 3}) ; 1
+(first {:c 3 :b 2 :a 1}) ; [:c 3]
+
+;; cdr
+;; next -> (seq (rest))
+(rest nil) ; ()
+(next nil) ; nil
+(rest []) ; ()
+(next []) ; nil
+(rest [1]) ; ()
+(next [1]) ; nil
+(rest '(5 1 3)) ; (1 3)
+(rest #{5 1 3}) ; (3 5)
+(rest {:c 3 :b 2 :a 1}) ; ([:b 2] [:a 1])
+
+;; cons
+(cons 10 nil) ; (10)
+(cons 10 []) ; (10)
+(cons 10 '(5 1 3)) ; (10 5 1 3)
+(cons 10 #{5 1 3}) ; (10 1 3 5)
+(cons 10 {:a 5 :b 1 :c 3}) ; (10 [:a 5] [:b 1] [:c 3])
+
+(conj nil 10 11 12) ; (12 11 10)
+(conj [] 10 11 12) ; [10 11 12]
+(conj '(5 1 3) 10 11 12) ; (12 11 10 5 1 3)
+(conj #{5 1 3} 10 11 12) ; #{1 3 12 11 5 10}
+(comment
+  (conj {:a 5 :b 1 :c 3} :d 10 :e 11 :f 12) ) ; Don't know how to create ...
+(conj {:a 5 :b 1 :c 3} [:d 10] [:e 11] [:f 12]) ; {:a 5 :b 1 :c 3 :d 10 ... }
+(conj {:a 5 :b 1 :c 3} {:d 10 :e 11} {:f 12}) ; {:a 5 :b 1 :c 3 :d 10 ... } ???
+
+(into nil [10 11 12]) ; (12 11 10)
+(into nil {:d 10 :e 11 :f 12}) ([:f 12] [:e 11] [:d 10])
+(into [] [10 11 12]) ; [10 11 12]
+(into [] {:d 10 :e 11 :f 12}) ; [[:d 10] [:e 11] [:f 12]]
+(into '(5 1 3) [10 11 12]) ; (12 11 10 5 1 3)
+(into '(5 1 3) {:d 10 :e 11 :f 12}) ; ([:f 12] [:e 11] [:d 10] 5 1 3)
+(into #{5 1 3} [10 11 12]) ; #{1 3 12 11 5 10}
+(into #{5 1 3} {:d 10 :e 11 :f 12}) ; #{[:f 12] 1 [:d 10] 3 [:e 11] 5}
+(into {:a 5 :b 1 :c 3} {:d 10 :e 11 :f 12}) ; {:a 5 :b 1 :c 3 :d 10 :e 11 :f 12}
+
+                                        ; range
+                                        ; repeat
+                                        ; iterate
+                                        ; take
+                                        ; cycle
+                                        ; interleave
+                                        ; interpose
+                                        ; str/join
+                                        ; filter
+                                        ; take-while
+                                        ; drop-while
+                                        ; split-at
+                                        ; split-with
+                                        ; every?
+                                        ; some
+                                        ; not-every?
+                                        ; not-any?
+                                        ; map
+                                        ; reduce
+                                        ; sort
+                                        ; sort-by
+                                        ; re-seq
+
+;; vector specific
+(comment
+  (nil 0)) ; Can't call nil
+([nil false "c"] 0) ; nil
+([nil false "c"] 1) ; false
+([nil false "c"] 2) "c"
+([nil false "c"] 3) ; Unhandled java.lang.IndexOutOfBoundsException
+([nil false "c"] :foo) ; Key must be integer
+
+(get [nil false "c"] 0) ; nil
+(get [nil false "c"] 1) ; false
+(get [nil false "c"] 2) ; "c"
+(get [nil false "c"] 3) ; nil
+(get [nil false "c"] :foo) ; nil
+(get [nil false "c"] :foo :not-found) ; :not-found
+
+(contains? [nil false "c"] 0) ; true
+(contains? [nil false "c"] 3) ; false
+(contains? [nil false "c"] :foo) ; false
+
+;; set specific
+(comment
+  (nil :a)) ; Can't call nil
+(#{nil false "c"} nil) ; nil
+(#{nil false "c"} false) ; false
+(#{nil false "c"} "c") ; "c"
+(#{nil false "c"} :c) ; nil
+
+(get nil :a) ; nil
+(get #{nil false "c"} nil) ; nil
+(get #{nil false "c"} false) ; false
+(get #{nil false "c"} "c") ; "c"
+(get #{nil false "c"} :c) ; nil
+(get #{nil false "c"} :c :not-found) ; :not-found
+
+(contains? #{nil false "c"} nil) ; true
+(contains? #{nil false "c"} :c) ; false
+
+;; map specific
+(comment
+  (nil :a)) ; Can't call nil
+({:a nil :b false "c" 1} :a) ; nil
+({:a nil :b false "c" 1} :b) ; false
+({:a nil :b false "c" 1} "c") ; 1
+({:a nil :b false "c" 1} :c) ; nil
+
+(:a nil) ; nil
+(:a {:a nil :b false "c" 1}) ; nil
+(:b {:a nil :b false "c" 1}) ; false
+("c" {:a nil :b false "c" 1}) ; "java.lang.String cannot be cast to ..."
+(:c {:a nil :b false "c" 1}) ; nil
+
+(get nil :a) ; nil
+(get {:a nil :b false "c" 1} :a) ; nil
+(get {:a nil :b false "c" 1} :b) ; false
+(get {:a nil :b false "c" 1} "c") ; 1
+(get {:a nil :b false "c" 1} :c) ; nil
+(get {:a nil :b false "c" 1} :c :not-found) ; :not-found
+
+(contains? {:a nil :b false "c" 1} :a) ; true
+(contains? {:a nil :b false "c" 1} :c) ; false
+
 ;;;; IO
 (defn lines [f]
   (str/split-lines (slurp f)))
