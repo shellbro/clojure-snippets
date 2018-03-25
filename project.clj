@@ -1,4 +1,4 @@
-(defproject clojure-snippets "0.1.0-SNAPSHOT"
+(defproject clojure-snippets "0.2.0"
   :description "This is my Clojure playground containing variety of code
 examples, utility functions and language idioms that I find worth of writing
 down somewhere."
