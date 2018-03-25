@@ -1,36 +1,32 @@
 # clojure-snippets
 
-FIXME: description
+This is my Clojure playground containing variety of code
+examples, utility functions and language idioms that I find worth of writing
+down somewhere.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+There isn't much to be installed here..
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar clojure-snippets-0.1.0-standalone.jar [args]
+Just eval any form at your whim.
 
 ## Options
 
-FIXME: listing of options this app accepts.
+None
 
 ## Examples
 
-...
+None
 
 ### Bugs
 
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+:)
 
 ## License
 
-Copyright © 2017 FIXME
+Copyright © 2018 Jakub Gorczyca
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
