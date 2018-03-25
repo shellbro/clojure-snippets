@@ -199,27 +199,33 @@
 ;;;; Bytes
 
 ;;;; Sequences and Collections
+;; sequential
 [1 2 3] ; [1 2 3]
 (vec (range 1 4)) ; [1 2 3]
 (vector 1 2 3) ; [1 2 3]
 
+;; sequential
 '(1 2 3) ; (1 2 3)
+(list 1 2 3) ; (1 2 3)
 
+;; sequential
 #{5 1 3} ; #{1 3 5}
 (set [5 1 3]) ; #{1 3 5}
 (hash-set 5 1 3) ; #{1 3 5}
-(sorted-set) ; #{}
 (sorted-set 5 1 3) ; #{1 3 5}
+(sorted-set) ; #{}
 
+;; associative
 {:c 3 :b 2 :a 1} ; {:c 3 :b 2 :a 1}
 (hash-map :c 3 :b 2 :a 1) ; {:c 3 :b 2 :a 1}
-(sorted-map) ; {}
 (sorted-map :c 3 :b 2 :a 1) ; {:a 1 :b 2 :c 3}
+(sorted-map) ; {}
 
 (seq nil) ; nil
 (seq []) ; nil
 (seq "foo") ; (\f \o \o)
 (seq? "foo") ; false
+(seqable? "foo") ; true
 (seq? (seq "foo")) ; true
 
 ;; car
@@ -361,6 +367,15 @@
 
 (binding [*out* *err*]
   (println "This text will be printed to STDERR"))
+
+;;;; Idioms
+
+(empty? nil) ; true
+(empty? []) ; true
+;; not-empty?
+(seq nil) ; nil
+(seq []) ; nil
+(seq [:a]) ; (:a)
 
 (defn -main
   "I don't do a whole lot ... yet."
