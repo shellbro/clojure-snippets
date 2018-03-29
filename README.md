@@ -1,6 +1,6 @@
 # clojure-snippets
 
-This is my Clojure playground containing variety of code
+This is my Clojure playground and cheatsheet containing variety of code
 examples, utility functions and language idioms that I find worth of writing
 down somewhere.
 
