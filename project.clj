@@ -1,7 +1,7 @@
 (defproject clojure-snippets "0.2.0"
-  :description "This is my Clojure playground containing variety of code
-examples, utility functions and language idioms that I find worth of writing
-down somewhere."
+  :description "This is my Clojure playground and cheatsheet containing
+variety of code examples, language idioms, utility functions and recipies
+that I find worth of writing down somewhere."
   :url "https://github.com/shellbro/clojure-snippets"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

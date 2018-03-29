@@ -1,8 +1,8 @@
 # clojure-snippets
 
-This is my Clojure playground and cheatsheet containing variety of code
-examples, utility functions and language idioms that I find worth of writing
-down somewhere.
+This is my Clojure playground and cheatsheet containing
+variety of code examples, language idioms, utility functions and recipies
+that I find worth of writing down somewhere.
 
 ## Installation
 
