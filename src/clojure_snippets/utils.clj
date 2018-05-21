@@ -43,16 +43,16 @@
    (let [f (str "%." precision "f")]
      (format f (bigdec x)))))
 
-(defn str->iso-date [s]
+(defn str-iso->date [s]
   (clj-time.format/parse (clj-time.format/formatters :year-month-day) s))
 
-(defn str->pl-pl-date [s]
+(defn str-pl-pl->date [s]
   (clj-time.format/parse (clj-time.format/formatter "dd.MM.YYYY") s))
 
-(defn iso-date->str [d]
+(defn date->str-iso [d]
   (clj-time.format/unparse (clj-time.format/formatters :year-month-day) d))
 
-(defn pl-pl-date->str [d]
+(defn date->str-pl-pl [d]
   (clj-time.format/unparse (clj-time.format/formatter "dd.MM.YYYY") d))
 
 (comment
