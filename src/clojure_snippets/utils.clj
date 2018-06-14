@@ -1,11 +1,38 @@
 (ns clojure-snippets.utils
   (:require [clj-time.format]
+            [clj-time.local :as local]
+            [clojure.edn :as edn]
+            [clojure.java.io :as io]
             [clojure.math.numeric-tower :as math]
             [clojure.string :as string])
   (:gen-class))
 
+(defn log [h & m]
+  (binding [*out* *err*]
+    (println
+     (apply str (local/local-now) " [" h "] " m))))
+
+(defn this-jar
+  "Utility function to get the name of jar in which this function is invoked"
+  [& [ns]]
+  (-> (or ns (class *ns*))
+      .getProtectionDomain .getCodeSource .getLocation .getPath))
+
+(defn dirname [path]
+  (-> (io/file path)
+      .getAbsoluteFile .getParent))
+
+(defn config-path []
+  (str (dirname (this-jar)) "/" "config.edn"))
+
+(defn get-config [path]
+  (edn/read-string (slurp path)))
+
 (defn lines [f]
   (string/split-lines (slurp f)))
+
+(defn uuid []
+  (.toString (java.util.UUID/randomUUID)))
 
 (defn round2
   "Round to the given precision (number of fractional digits)"
