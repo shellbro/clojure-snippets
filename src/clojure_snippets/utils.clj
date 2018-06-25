@@ -1,6 +1,6 @@
 (ns clojure-snippets.utils
   (:require [clj-time.format]
-            [clj-time.local :as local]
+            [clj-time.local]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.math.numeric-tower :as math]
@@ -10,7 +10,7 @@
 (defn log [h & m]
   (binding [*out* *err*]
     (println
-     (apply str (local/local-now) " [" h "] " m))))
+     (apply str (clj-time.local/local-now) " [" h "] " m))))
 
 (defn working-dir []
   (System/getProperty "user.dir"))
