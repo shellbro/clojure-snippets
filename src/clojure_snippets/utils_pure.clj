@@ -64,6 +64,9 @@
    (let [f (str "%." precision "f")]
      (format f (bigdec x)))))
 
+(defn re-escape [s]
+  (java.util.regex.Pattern/quote s))
+
 (defmulti normalize (fn [x]
                       (cond
                         (string? x) :string
