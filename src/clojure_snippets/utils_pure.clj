@@ -74,8 +74,9 @@
 
 (defmethod normalize :string [s]
   (-> s
+      (string/replace #"\s+" " ")
       string/trim
-      string/lower-case))
+      string/capitalize))
 
 (defmethod normalize :seqable [coll]
   (map normalize coll))
