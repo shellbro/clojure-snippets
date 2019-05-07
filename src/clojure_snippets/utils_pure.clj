@@ -64,13 +64,15 @@
    (let [f (str "%." precision "f")]
      (format f (bigdec x)))))
 
-(defn re-escape [s]
+(defn re-quote [s]
   (java.util.regex.Pattern/quote s))
 
 (defmulti normalize (fn [x]
                       (cond
                         (string? x) :string
                         (seqable? x) :seqable)))
+
+(defmethod normalize :nil [x] nil)
 
 (defmethod normalize :string [s]
   (-> s
